@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require("../models/Post");
+const Post = require("../models/Post"); //Importing the model. A model is the structure of how will be stored in the DB
 
 // Gets back all posts
 router.get('/', async (req, res) => {
@@ -82,5 +82,5 @@ router.patch('/:postId', async (req, res) => {
     }
 });
 
-
+// Export this middleware (defining what happens when user reaches /posts)
 module.exports = router;

@@ -17,6 +17,7 @@ const postsRoute = require('./routes/posts');
 app.use('/posts', postsRoute); //Also a middleware. Simply means, whenever the user navigates to /posts, use *postRoute*
 
 //ROUTES
+// Example of the most rudimentry method of using routes(without the express' router)
 app.get('/', (req, res) => {
     res.send("We are on home");
 });
