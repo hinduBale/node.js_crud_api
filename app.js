@@ -1,7 +1,6 @@
 const express = require("express"); //Express provided us with the functionality of using Routes (by exporting the router)
 const mongoose = require('mongoose'); // Mongoose was used to create the Post schema for storage in  MongoDB and it also provided cool methods
                                       // on the schema, such as findById, remove, updateOne etc. Also used to connect to the DB
-const bodyParser = require("body-parser"); //Used to make req.body work 
 const cors = require("cors"); // Used such that our API can be called by external sources
 require('dotenv/config'); // Used to store password for the DB User safely in the .env file. It didn't require the const require drama
 
@@ -10,7 +9,8 @@ const app = express();
 
 // Middlewares
 // Functions that are executed when routes are being hit
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 
 const postsRoute = require('./routes/posts');
@@ -23,8 +23,9 @@ app.get('/', (req, res) => {
 });
 
 //Connect to db here
-mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true }, () => 
-    console.log("Connected to the DB!!")
+mongoose.connect(process.env.DB_CONNECTION, 
+    { useUnifiedTopology: true, useNewUrlParser: true}, 
+    () => console.log("Connected to the DB!!")
 );
 
 // Start listening to the server
